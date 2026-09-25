@@ -1,0 +1,101 @@
+# Copyright (c) 2026 Ming-Chih Lung (Taiwan, Tainan)
+# SPDX-License-Identifier: MIT
+# legacy-bridge manifest for the demo LegacyFlasher tool.
+# "What each layer COULD do" is declared here; probes decide what it CAN do.
+
+tool:
+  name: LegacyFlasher
+  # {manifest_dir}, {python}, and env vars (${VAR:-default}) are expanded.
+  home: "${LEGACY_FLASHER_HOME:-{manifest_dir}/../demo_app}"
+  exe: "{manifest_dir}/../demo_app/legacy_flasher.py"
+  launch: ["{python}", "{exe}"]          # on Windows usually just ["C:/LF/lf.exe"]
+  window_title_re: "^LegacyFlasher"
+  version:
+    cli: ["{python}", "{exe}", "/version"]
+
+# Default preference; a single action may override with `prefer:`.
+layer_order: [L1, L0, L2, L3]
+
+states:
+  MainWindow:
+    L2: { window_title_re: "^LegacyFlasher" }
+    L3: { template: "templates/main_window.png", min_score: 0.8 }
+  Flashing:
+    L2: { control: btnFlash, enabled: false }
+    L0: { log_last_line_re: "progress \\d+%$" }
+  ErrorPopup:
+    L2: { window_title_re: "^(Error|錯誤)" }
+    L3: { ocr_contains: "Error" }
+
+actions:
+  get_version:
+    kind: observe
+    description: 取得工具版本
+    returns: { type: string }
+    backends:
+      L1: { impl: cli, args: ["/version"], parse: stdout_strip }
+
+  get_baudrate:
+    kind: observe
+    description: 讀取目前 baud rate 設定
+    returns: { type: integer }
+    backends:
+      L0: { impl: ini_read, file: "{home}/lf.ini", section: COM, key: Baud, cast: int }
+      L2: { impl: uia_value, auto_id: cmbBaud, cast: int }
+      L3: { impl: ocr_region, anchor_text: "Baud rate", offset: [120, 0, 160, 24], cast: int }
+
+  set_baudrate:
+    kind: act
+    description: 設定序列埠 baud rate
+    params:
+      value: { type: integer, enum: [9600, 57600, 115200], description: "Baud rate" }
+    states: [MainWindow]
+    effects: { reversible: true, idempotent: true }
+    verify: { observe: get_baudrate, equals: "{value}" }
+    prefer: [L2, L1, L0, L3]     # GUI running -> change it live first
+    backends:
+      L0: { impl: ini_write, file: "{home}/lf.ini", section: COM, key: Baud, note: "GUI 開著時需重啟才生效" }
+      L1: { impl: cli, args: ["/baud", "{value}"], ok_re: "^OK" }
+      L2: { impl: uia_select, auto_id: cmbBaud, value: "{value}" }
+      L3: { impl: vision_select, hint: "Baud rate 下拉選單", option: "{value}" }
+
+  flash_firmware:
+    kind: act
+    description: 將韌體映像燒錄到裝置（不可逆）
+    params:
+      path: { type: path, description: "韌體映像檔路徑" }
+    states: [MainWindow]
+    effects: { reversible: false, destructive: true, long_running: true }
+    confirm: "即將燒錄 {path}，此操作不可逆，確定？"
+    verify: { observe: read_log, contains: "flash done OK" }
+    backends:
+      L1:
+        impl: cli
+        args: ["/flash", "{path}"]
+        ok_re: "^OK flash"
+        progress_re: "progress (\\d+)%"
+        timeout_s: 600
+      L2:
+        impl: uia_sequence
+        steps:
+          - { set_text: { auto_id: txtPath, text: "{path}" } }
+          - { click: { auto_id: btnFlash } }
+          - { wait_for: { log_contains: "flash done", timeout_s: 600 } }
+      L3:
+        impl: vision_sequence
+        steps:
+          - { click: { hint: "Firmware 輸入框" } }
+          - { type: "{path}" }
+          - { click: { hint: "Flash 按鈕", template: "templates/btn_flash.png" } }
+          - { wait_for: { ocr_contains: "flash done", timeout_s: 600 } }
+
+  read_log:
+    kind: observe
+    description: 讀取最近的 log
+    params:
+      lines: { type: integer, default: 20, description: "行數" }
+    returns: { type: string }
+    backends:
+      L0: { impl: file_tail, file: "{home}/logs/lf.log" }
+      L2: { impl: uia_text, auto_id: txtLog, tail: true }
+      L3: { impl: ocr_region, region: log_panel }

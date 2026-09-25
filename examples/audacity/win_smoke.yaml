@@ -1,0 +1,31 @@
+# Copyright (c) 2026 Ming-Chih Lung (Taiwan, Tainan)
+# SPDX-License-Identifier: MIT
+# Windows-only L0/L1 impls that Audacity doesn't exercise: ctypes DLL calls and COM.
+tool:
+  name: WinSmoke
+  home: "{manifest_dir}"
+layer_order: [L1, L0]
+actions:
+  screen_width:
+    kind: observe
+    description: user32!GetSystemMetrics(SM_CXSCREEN)
+    backends:
+      L0: { impl: ctypes_call, dll: user32, abi: stdcall, symbol: GetSystemMetrics, argtypes: [c_int], restype: c_int, args: [0] }
+  tick_count:
+    kind: observe
+    backends:
+      L0: { impl: ctypes_call, dll: kernel32, abi: stdcall, symbol: GetTickCount64, restype: c_ulonglong }
+  folder_exists:
+    kind: observe
+    params:
+      path: { type: string }
+    backends:
+      L1: { impl: com_call, progid: Scripting.FileSystemObject, method: FolderExists, args: ["{path}"] }
+  windows_dir_via_com:
+    kind: observe
+    backends:
+      L1: { impl: com_call, progid: WScript.Shell, method: ExpandEnvironmentStrings, args: ["%WINDIR%"] }
+  missing_dll:
+    kind: observe
+    backends:
+      L0: { impl: ctypes_call, dll: no_such_library_xyz, symbol: Foo }

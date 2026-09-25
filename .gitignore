@@ -1,0 +1,9 @@
+# Copyright (c) 2026 Ming-Chih Lung (Taiwan, Tainan)
+# SPDX-License-Identifier: MIT
+
+__pycache__/
+*.egg-info/
+.pytest_cache/
+demo_app/lf.ini
+demo_app/logs/
+trace.jsonl

@@ -1,0 +1,235 @@
+# Copyright (c) 2026 Ming-Chih Lung (Taiwan, Tainan)
+# SPDX-License-Identifier: MIT
+# legacy-bridge manifest for Audacity 3.7.x portable (Windows)
+tool:
+  name: Audacity
+  home: "{manifest_dir}/audacity"
+  exe: "{manifest_dir}/audacity/Audacity.exe"
+  launch: ["{exe}"]
+  launch_wait_s: 6
+  process_name: Audacity.exe
+  window_title_re: "^Audacity$"   # main window; any other top-level window of the process = dialog
+  help_args: []                   # GUI app: no batch CLI help
+  popups:                         # first-run prompts the session dismisses automatically (L2)
+    - { title_re: "^Audacity 專案檔案|^Audacity Project Files", press: "CommandButton_7" }   # file association -> No
+    - { title_re: "^程式更新與使用資訊|^Update", press: "5100" }   # update/usage info -> Accept and continue
+    - { title_re: "^Install Audacity 4", press: "No thanks" }
+    - { title_re: "^歡迎使用 Audacity|^Welcome to Audacity", press: "^(確定|OK)$" }
+
+layer_order: [L1, L0, L2, L3]
+
+states:
+  Dialog:
+    L2: { dialog_open: true }
+  MainWindow:
+    L2: { window_title_re: "^Audacity$" }
+    L3: { ocr_contains: "Audio Setup" }
+
+actions:
+  get_version:
+    kind: observe
+    description: Audacity 版本（讀 exe 版本資源）
+    returns: { type: string }
+    backends:
+      L0: { impl: file_version, file: "{exe}" }
+
+  get_scripting_status:
+    kind: observe
+    description: mod-script-pipe 模組狀態（1=Enabled, 4=New, 0=Disabled）
+    returns: { type: integer }
+    backends:
+      L0: { impl: ini_read, file: "{home}/Portable Settings/audacity.cfg", section: Module, key: mod-script-pipe, cast: int }
+
+  enable_scripting:
+    kind: act
+    description: 啟用 mod-script-pipe（寫 audacity.cfg，Audacity 重啟後生效）
+    effects: { reversible: true, idempotent: true }
+    verify: { observe: get_scripting_status, equals: 1 }
+    backends:
+      L0:
+        impl: ini_write
+        file: "{home}/Portable Settings/audacity.cfg"
+        spaces: false
+        values:
+          Module/mod-script-pipe: 1
+          ModulePath/mod-script-pipe: "{home}/modules/mod-script-pipe.dll"
+          ModuleDateTime/mod-script-pipe: { mtime_iso: "{home}/modules/mod-script-pipe.dll" }
+        note: "Audacity 開著時需重啟才生效"
+
+  set_language:
+    kind: act
+    description: 設定介面語言（寫 audacity.cfg；需在 Audacity 關閉時寫入，重啟生效）
+    params:
+      lang: { type: string, enum: [en, zh_TW, zh_CN, ja], description: "語言代碼" }
+    effects: { reversible: true, idempotent: true }
+    verify: { observe: get_preference, params: { name: Locale/Language }, equals: "{lang}" }
+    backends:
+      L0: { impl: ini_write, file: "{home}/Portable Settings/audacity.cfg", section: Locale, key: Language, value: "{lang}" }
+
+  close_app:
+    kind: act
+    description: 關閉 Audacity；有未存檔變更時需 discard=true 才會放棄變更
+    params:
+      discard: { type: boolean, default: false, description: "放棄未存檔的變更" }
+    states: [MainWindow]
+    backends:
+      L1: { impl: pipe_cmd, to_pipe: '\\.\pipe\ToSrvPipe', from_pipe: '\\.\pipe\FromSrvPipe', command: "Exit:", timeout_s: 5, expect_eof: true }
+      L2: { impl: uia_close, save_prompt_re: "^Save changes|^儲存", discard: "{discard}", discard_button_re: "^(No|否)" }
+    prefer: [L2, L1]
+
+  disable_scripting:
+    kind: act
+    description: 停用 mod-script-pipe（測試 L1 不可用時的 fallback；Audacity 關閉時寫入）
+    effects: { reversible: true, idempotent: true }
+    verify: { observe: get_scripting_status, equals: 0 }
+    backends:
+      L0: { impl: ini_write, file: "{home}/Portable Settings/audacity.cfg", section: Module, key: mod-script-pipe, value: 0 }
+
+  get_preference:
+    kind: observe
+    description: 讀取偏好設定，例如 GUI/Theme
+    params:
+      name: { type: string, description: "偏好路徑，如 GUI/Theme" }
+    returns: { type: string }
+    backends:
+      L1: { impl: pipe_cmd, to_pipe: '\\.\pipe\ToSrvPipe', from_pipe: '\\.\pipe\FromSrvPipe',
+            command: "GetPreference: Name={name}", parse: text_before_status,
+            unavailable_note: "mod-script-pipe 未啟用或 Audacity 未執行" }
+      L0: { impl: ini_read, file: "{home}/Portable Settings/audacity.cfg", path: "{name}" }
+
+  get_track_count:
+    kind: observe
+    description: 目前專案的音軌數
+    returns: { type: integer }
+    backends:
+      L1: { impl: pipe_cmd, to_pipe: '\\.\pipe\ToSrvPipe', from_pipe: '\\.\pipe\FromSrvPipe',
+            command: "GetInfo: Type=Tracks Format=JSON", parse: json_before_status, select: len }
+      L2: { impl: uia_count, control_type: Custom, name_re: "^\\d+ " }   # TrackView table rows: "1 Audio 1  Selected"
+
+  generate_tone:
+    kind: act
+    description: 產生一段正弦波（新增一條音軌）
+    params:
+      frequency: { type: number, default: 440, description: "頻率 Hz" }
+      duration: { type: number, default: 2, description: "秒" }
+    states: [MainWindow]
+    verify:                                   # every layer must add one track AND one clip of audio
+      - { observe: get_track_count, increases_by: 1 }
+      - { observe: get_clip_count, increases_by: 1, required: false }   # skipped (weaker check) if the pipe is down
+    backends:
+      L1:
+        impl: pipe_cmd
+        to_pipe: '\\.\pipe\ToSrvPipe'
+        from_pipe: '\\.\pipe\FromSrvPipe'
+        commands:
+          - "NewMonoTrack:"
+          - "SelectTime: Start=0 End={duration} RelativeTo=ProjectStart"
+          - "Tone: Frequency={frequency} Amplitude=0.5 Waveform=Sine"
+      L2:
+        impl: uia_sequence
+        steps:
+          - { menu: "Tracks->Add New->Mono Track" } # same semantics as L1: new track, then tone
+          - { sleep: 0.5 }
+          - { menu: "Generate->Tone..." }          # native menu -> WM_COMMAND
+          - { dialog: { title_re: "^Tone$", timeout_s: 5 } }
+          - { set_field: { name: "Frequency (Hz):", text: "{frequency}" } }
+          - { set_field: { name: "Amplitude (0-1):", text: "0.5" } }
+          - { press: "Generate" }                   # duration: dialog default / current selection
+          - { main: true }
+          - { sleep: 1.0 }
+        cleanup:
+          - { dialog: { title_re: "^Tone$", timeout_s: 1 } }
+          - { press: "Cancel" }
+      L3:
+        impl: vision_sequence
+        steps:
+          - { click: { template: templates/menu_tracks.png, text: "Tracks" } }   # template first, OCR fallback
+          - { click: { text: "Add New" } }
+          - { click: { text: "Mono Track" } }
+          - { click: { template: templates/menu_generate.png, text: "Generate" } }
+          - { click: { text: "Tone" } }              # OCR on the opened menu
+          - { wait_for: { state: Dialog, timeout_s: 5, interval_s: 0.2 } }   # cheap: no full-window OCR
+          - { key: "enter" }                         # default button = Generate
+
+  get_clip_count:
+    kind: observe
+    description: 所有音軌的 clip 總數
+    returns: { type: integer }
+    backends:
+      L1: { impl: pipe_cmd, to_pipe: '\\.\pipe\ToSrvPipe', from_pipe: '\\.\pipe\FromSrvPipe',
+            command: "GetInfo: Type=Clips Format=JSON", parse: json_before_status, select: len }
+
+  get_clips:
+    kind: observe
+    description: 各音軌的 clip（起訖時間）
+    returns: { type: array }
+    backends:
+      L1: { impl: pipe_cmd, to_pipe: '\\.\pipe\ToSrvPipe', from_pipe: '\\.\pipe\FromSrvPipe',
+            command: "GetInfo: Type=Clips Format=JSON", parse: json_before_status }
+
+  get_selection_length:
+    kind: observe
+    description: 目前選取範圍長度（秒）
+    returns: { type: number }
+    backends:
+      L1: { impl: pipe_cmd, to_pipe: '\\.\pipe\ToSrvPipe', from_pipe: '\\.\pipe\FromSrvPipe',
+            command: "GetInfo: Type=Selection Format=JSON", parse: json_before_status, select: sel_len }
+
+  select_none:
+    kind: act
+    description: 取消選取
+    effects: { idempotent: true }
+    states: [MainWindow]
+    backends:
+      L1: { impl: pipe_cmd, to_pipe: '\\.\pipe\ToSrvPipe', from_pipe: '\\.\pipe\FromSrvPipe', command: "SelectNone:" }
+
+  select_all:
+    kind: act
+    description: 全選
+    effects: { idempotent: true }
+    states: [MainWindow]
+    verify: { observe: get_selection_length, at_least: 0.001, required: false }
+    backends:
+      L1: { impl: pipe_cmd, to_pipe: '\\.\pipe\ToSrvPipe', from_pipe: '\\.\pipe\FromSrvPipe', command: "SelectAll:" }
+      L2: { impl: uia_sequence, steps: [ { key: "^a" } ] }
+      L3: { impl: vision_sequence, steps: [ { key: "ctrl+a" } ] }
+
+  undo:
+    kind: act
+    description: 復原上一個動作
+    states: [MainWindow]
+    backends:
+      L1: { impl: pipe_cmd, to_pipe: '\\.\pipe\ToSrvPipe', from_pipe: '\\.\pipe\FromSrvPipe', command: "Undo:" }
+      L2: { impl: uia_sequence, steps: [ { key: "^z" } ] }
+      L3: { impl: vision_sequence, steps: [ { key: "ctrl+z" } ] }
+
+  export_wav:
+    kind: act
+    description: 匯出目前專案為 WAV
+    params:
+      path: { type: path, description: "輸出 .wav 路徑" }
+    states: [MainWindow]
+    effects: { idempotent: true, long_running: true }   # returned as an MCP Task to Tasks-capable clients
+    verify: { observe: wav_exists, params: { path: "{path}" }, equals: "True" }
+    backends:
+      L1: { impl: pipe_cmd, to_pipe: '\\.\pipe\ToSrvPipe', from_pipe: '\\.\pipe\FromSrvPipe',
+            command: 'Export2: Filename="{path}" NumChannels=1', timeout_s: 120 }
+
+  wav_exists:
+    kind: observe
+    description: 檢查檔案存在且非空
+    params:
+      path: { type: path }
+    returns: { type: boolean }
+    backends:
+      L0: { impl: file_exists, file: "{path}", bool: true, min_bytes: 44 }
+
+  remove_all_tracks:
+    kind: act
+    description: 刪除所有音軌
+    effects: { destructive: true, reversible: true }
+    confirm: "要刪除目前專案的所有音軌嗎？"
+    states: [MainWindow]
+    backends:
+      L1: { impl: pipe_cmd, to_pipe: '\\.\pipe\ToSrvPipe', from_pipe: '\\.\pipe\FromSrvPipe',
+            commands: ["SelectAll:", "RemoveTracks:"] }

@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "legacy-flasher": {
+      "command": "lb-mcp",
+      "args": ["--manifest", "C:/tools/legacy-bridge/manifests/legacy_flasher.yaml"],
+      "env": { "LB_TRACE": "C:/tools/legacy-bridge/trace.jsonl" }
+    }
+  }
+}
