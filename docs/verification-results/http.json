@@ -1,0 +1,43 @@
+[
+ {
+  "step": "protocol",
+  "ok": true,
+  "value": "2026-07-28"
+ },
+ {
+  "step": "get_version",
+  "ok": true,
+  "value": {
+   "ms": 22,
+   "via": "L0",
+   "verified": null,
+   "value": "3.7.9.0",
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "get_track_count",
+  "ok": true,
+  "value": {
+   "ms": 45,
+   "via": "L1",
+   "verified": null,
+   "value": 1,
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "get_preference",
+  "ok": true,
+  "value": {
+   "ms": 37,
+   "via": "L1",
+   "verified": null,
+   "value": "en",
+   "error": null,
+   "chain": []
+  }
+ }
+]

@@ -1,0 +1,107 @@
+[
+ {
+  "step": "elicitation",
+  "ok": null,
+  "value": "要刪除目前專案的所有音軌嗎？"
+ },
+ {
+  "step": "remove_all_tracks",
+  "ok": true,
+  "value": {
+   "ms": 399,
+   "via": "L1",
+   "verified": null,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L3]",
+  "ok": true,
+  "value": {
+   "ms": 31734,
+   "via": "L3",
+   "verified": true,
+   "value": {
+    "steps": 7
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L3]",
+  "ok": true,
+  "value": {
+   "ms": 29244,
+   "via": "L3",
+   "verified": true,
+   "value": {
+    "steps": 7
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L3]",
+  "ok": true,
+  "value": {
+   "ms": 28412,
+   "via": "L3",
+   "verified": true,
+   "value": {
+    "steps": 7
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L3]",
+  "ok": true,
+  "value": {
+   "ms": 28147,
+   "via": "L3",
+   "verified": true,
+   "value": {
+    "steps": 7
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L3]",
+  "ok": true,
+  "value": {
+   "ms": 30188,
+   "via": "L3",
+   "verified": true,
+   "value": {
+    "steps": 7
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "summary",
+  "ok": true,
+  "value": {
+   "L3": {
+    "ok": 5,
+    "n": 5,
+    "tracks_after": 5,
+    "median_ms": 28797,
+    "max_ms": 31250
+   }
+  }
+ }
+]

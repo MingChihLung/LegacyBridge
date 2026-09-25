@@ -1,0 +1,284 @@
+[
+ {
+  "step": "elicitation",
+  "ok": null,
+  "value": "要刪除目前專案的所有音軌嗎？"
+ },
+ {
+  "step": "remove_all_tracks",
+  "ok": false,
+  "value": {
+   "ms": 4,
+   "via": null,
+   "verified": null,
+   "value": null,
+   "error": "declined by user",
+   "chain": []
+  }
+ },
+ {
+  "step": "mrtr_decline_kept_tracks",
+  "ok": true,
+  "value": {
+   "before": 5,
+   "after": 5
+  }
+ },
+ {
+  "step": "elicitation",
+  "ok": null,
+  "value": "要刪除目前專案的所有音軌嗎？"
+ },
+ {
+  "step": "remove_all_tracks",
+  "ok": true,
+  "value": {
+   "ms": 432,
+   "via": "L1",
+   "verified": null,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone",
+  "ok": true,
+  "value": {
+   "ms": 553,
+   "via": "L1",
+   "verified": true,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "key",
+  "ok": true,
+  "value": {
+   "ms": 205,
+   "via": null,
+   "verified": null,
+   "value": {
+    "ok": true,
+    "via": "L2",
+    "combo": "%g"
+   },
+   "error": null,
+   "chain": null
+  }
+ },
+ {
+  "step": "key",
+  "ok": true,
+  "value": {
+   "ms": 109,
+   "via": null,
+   "verified": null,
+   "value": {
+    "ok": true,
+    "via": "L2",
+    "combo": "t"
+   },
+   "error": null,
+   "chain": null
+  }
+ },
+ {
+  "step": "state_with_modal",
+  "ok": false,
+  "value": {
+   "state": "MainWindow",
+   "via": "L2"
+  }
+ },
+ {
+  "step": "available_now_with_modal",
+  "ok": false,
+  "value": {
+   "state": "MainWindow",
+   "actions": [
+    "get_version",
+    "get_scripting_status",
+    "enable_scripting",
+    "set_language",
+    "close_app",
+    "get_preference",
+    "get_track_count",
+    "generate_tone",
+    "get_clip_count",
+    "get_clips",
+    "select_all",
+    "undo",
+    "export_wav",
+    "wav_exists",
+    "remove_all_tracks"
+   ],
+   "lowlevel": {
+    "get_ui_tree": [
+     "L2"
+    ],
+    "screenshot": [
+     "L3"
+    ],
+    "click": [
+     "L2",
+     "L3"
+    ],
+    "type": [
+     "L2",
+     "L3"
+    ],
+    "key": [
+     "L2",
+     "L3"
+    ]
+   }
+  }
+ },
+ {
+  "step": "select_all",
+  "ok": true,
+  "value": {
+   "ms": 362,
+   "via": "L1",
+   "verified": null,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "gated_refusal",
+  "ok": false,
+  "value": null
+ },
+ {
+  "step": "click",
+  "ok": false,
+  "value": {
+   "ms": 1190,
+   "via": null,
+   "verified": null,
+   "value": {},
+   "error": null,
+   "chain": null
+  }
+ },
+ {
+  "step": "state_after_cancel",
+  "ok": true,
+  "value": {
+   "state": "MainWindow",
+   "via": "L2"
+  }
+ },
+ {
+  "step": "export_wav",
+  "ok": true,
+  "value": {
+   "ms": 424,
+   "via": "L1",
+   "verified": true,
+   "value": {
+    "responses": [
+     "Exported to WAV format: D:\\LegacyBridge\\lb-test\\out\\task_export.wav\nBatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "tasks_statuses",
+  "ok": true,
+  "value": {
+   "polls": 3,
+   "statuses": [
+    "completed",
+    "working"
+   ],
+   "last": "completed",
+   "status_messages": [
+    null,
+    null,
+    "100% Export2"
+   ]
+  }
+ },
+ {
+  "step": "resource state",
+  "ok": true,
+  "value": {
+   "bytes": 36,
+   "head": "{\"state\": \"MainWindow\", \"via\": \"L2\"}"
+  }
+ },
+ {
+  "step": "resource capabilities",
+  "ok": true,
+  "value": {
+   "bytes": 3987,
+   "head": "{\"tool\": \"Audacity\", \"version\": \"3.7.9.0\", \"manifest\": \"b42ee573e6ba\", \"session\": \"s_ec9c03c3\", \"state\": \"MainWindow\", \""
+  }
+ },
+ {
+  "step": "resource manifest",
+  "ok": true,
+  "value": {
+   "bytes": 8490,
+   "head": "# legacy-bridge manifest for Audacity 3.7.x portable (Windows)\ntool:\n  name: Audacity\n  home: \"{manifest_dir}/audacity\"\n"
+  }
+ },
+ {
+  "step": "explain",
+  "ok": true,
+  "value": {
+   "ms": 170,
+   "via": null,
+   "verified": null,
+   "value": {
+    "action": "export_wav",
+    "available_now": true,
+    "state": "MainWindow",
+    "fallback_chain": [
+     "L1"
+    ],
+    "blocked_layers": {
+     "L0": {
+      "support": "unsupported",
+      "note": "not declared in manifest"
+     },
+     "L2": {
+      "support": "unsupported",
+      "note": "not declared in manifest"
+     },
+     "L3": {
+      "support": "unsupported",
+      "note": "not declared in manifest"
+     }
+    }
+   },
+   "error": null,
+   "chain": [
+    "L1"
+   ]
+  }
+ }
+]

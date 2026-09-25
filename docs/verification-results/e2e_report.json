@@ -1,0 +1,754 @@
+{
+ "steps": [
+  {
+   "step": "handshake",
+   "value": {
+    "protocol": "2026-07-28",
+    "extensions": [
+     "io.modelcontextprotocol/tasks"
+    ],
+    "n_tools": 31
+   }
+  },
+  {
+   "step": "capabilities",
+   "value": {
+    "state": "MainWindow",
+    "backends": {
+     "L0": "ok",
+     "L1": "partial",
+     "L2": "ok",
+     "L3": "ok"
+    },
+    "actions": {
+     "get_version": "L0",
+     "get_scripting_status": "L0",
+     "enable_scripting": "L0",
+     "set_language": "L0",
+     "close_app": "L2",
+     "get_preference": "L1",
+     "get_track_count": "L1",
+     "generate_tone": "L1",
+     "get_clip_count": "L1",
+     "get_clips": "L1",
+     "select_all": "L1",
+     "undo": "L1",
+     "export_wav": "L1",
+     "wav_exists": "L0",
+     "remove_all_tracks": "L1"
+    }
+   }
+  },
+  {
+   "step": "get_version",
+   "value": {
+    "is_error": false,
+    "ms": 7,
+    "result": {
+     "ok": true,
+     "action": "get_version",
+     "backend": "L0",
+     "value": "3.7.9.0",
+     "verified": null,
+     "fallback_chain": [],
+     "state": null,
+     "error": null,
+     "explain": null,
+     "elapsed_ms": 0,
+     "task_id": null
+    }
+   }
+  },
+  {
+   "step": "get_preference",
+   "value": {
+    "is_error": false,
+    "ms": 49,
+    "result": {
+     "ok": true,
+     "action": "get_preference",
+     "backend": "L1",
+     "value": "en",
+     "verified": null,
+     "fallback_chain": [],
+     "state": null,
+     "error": null,
+     "explain": null,
+     "elapsed_ms": 47,
+     "task_id": null
+    }
+   }
+  },
+  {
+   "step": "elicitation",
+   "value": "要刪除目前專案的所有音軌嗎？"
+  },
+  {
+   "step": "remove_all_tracks",
+   "value": {
+    "is_error": false,
+    "ms": 386,
+    "result": {
+     "ok": true,
+     "action": "remove_all_tracks",
+     "backend": "L1",
+     "value": {
+      "responses": [
+       "BatchCommand finished: OK",
+       "BatchCommand finished: OK"
+      ]
+     },
+     "verified": null,
+     "fallback_chain": [],
+     "state": "MainWindow",
+     "error": null,
+     "explain": null,
+     "elapsed_ms": 187,
+     "task_id": null
+    }
+   }
+  },
+  {
+   "step": "generate_tone",
+   "value": {
+    "is_error": false,
+    "ms": 562,
+    "result": {
+     "ok": true,
+     "action": "generate_tone",
+     "backend": "L1",
+     "value": {
+      "responses": [
+       "BatchCommand finished: OK",
+       "BatchCommand finished: OK",
+       "BatchCommand finished: OK"
+      ]
+     },
+     "verified": true,
+     "fallback_chain": [],
+     "state": "MainWindow",
+     "error": null,
+     "explain": null,
+     "elapsed_ms": 375,
+     "task_id": null
+    }
+   }
+  },
+  {
+   "step": "get_track_count",
+   "value": {
+    "is_error": false,
+    "ms": 40,
+    "result": {
+     "ok": true,
+     "action": "get_track_count",
+     "backend": "L1",
+     "value": 1,
+     "verified": null,
+     "fallback_chain": [],
+     "state": null,
+     "error": null,
+     "explain": null,
+     "elapsed_ms": 30,
+     "task_id": null
+    }
+   }
+  },
+  {
+   "step": "generate_tone[L2]",
+   "value": {
+    "is_error": false,
+    "ms": 5397,
+    "result": {
+     "ok": true,
+     "action": "generate_tone",
+     "backend": "L2",
+     "value": {
+      "steps": 9
+     },
+     "verified": true,
+     "fallback_chain": [],
+     "state": "MainWindow",
+     "error": null,
+     "explain": null,
+     "elapsed_ms": 5218,
+     "task_id": null
+    }
+   }
+  },
+  {
+   "step": "get_track_count",
+   "value": {
+    "is_error": false,
+    "ms": 29,
+    "result": {
+     "ok": true,
+     "action": "get_track_count",
+     "backend": "L1",
+     "value": 2,
+     "verified": null,
+     "fallback_chain": [],
+     "state": null,
+     "error": null,
+     "explain": null,
+     "elapsed_ms": 31,
+     "task_id": null
+    }
+   }
+  },
+  {
+   "step": "get_track_count[L2]",
+   "value": {
+    "is_error": false,
+    "ms": 174,
+    "result": {
+     "ok": true,
+     "action": "get_track_count",
+     "backend": "L2",
+     "value": 2,
+     "verified": null,
+     "fallback_chain": [],
+     "state": null,
+     "error": null,
+     "explain": null,
+     "elapsed_ms": 171,
+     "task_id": null
+    }
+   }
+  },
+  {
+   "step": "undo[L3]",
+   "value": {
+    "is_error": false,
+    "ms": 1015,
+    "result": {
+     "ok": true,
+     "action": "undo",
+     "backend": "L3",
+     "value": {
+      "steps": 1
+     },
+     "verified": null,
+     "fallback_chain": [],
+     "state": "MainWindow",
+     "error": null,
+     "explain": null,
+     "elapsed_ms": 844,
+     "task_id": null
+    }
+   }
+  },
+  {
+   "step": "get_track_count",
+   "value": {
+    "is_error": false,
+    "ms": 28,
+    "result": {
+     "ok": true,
+     "action": "get_track_count",
+     "backend": "L1",
+     "value": 2,
+     "verified": null,
+     "fallback_chain": [],
+     "state": null,
+     "error": null,
+     "explain": null,
+     "elapsed_ms": 32,
+     "task_id": null
+    }
+   }
+  },
+  {
+   "step": "get_clips",
+   "value": {
+    "is_error": false,
+    "ms": 42,
+    "result": {
+     "ok": true,
+     "action": "get_clips",
+     "backend": "L1",
+     "value": [
+      {
+       "track": 0,
+       "start": 0,
+       "end": 1.5,
+       "color": 0,
+       "name": "Audio 1.1"
+      }
+     ],
+     "verified": null,
+     "fallback_chain": [],
+     "state": null,
+     "error": null,
+     "explain": null,
+     "elapsed_ms": 31,
+     "task_id": null
+    }
+   }
+  },
+  {
+   "step": "select_all[L2]",
+   "value": {
+    "is_error": false,
+    "ms": 556,
+    "result": {
+     "ok": true,
+     "action": "select_all",
+     "backend": "L2",
+     "value": {
+      "steps": 1
+     },
+     "verified": null,
+     "fallback_chain": [],
+     "state": "MainWindow",
+     "error": null,
+     "explain": null,
+     "elapsed_ms": 375,
+     "task_id": null
+    }
+   }
+  },
+  {
+   "step": "export_wav",
+   "value": {
+    "is_error": false,
+    "ms": 1014,
+    "result": {
+     "ok": true,
+     "action": "export_wav",
+     "backend": "L1",
+     "value": {
+      "responses": [
+       "Exported to WAV format: D:\\LegacyBridge\\lb-test\\out\\mcp_tone.wav\nBatchCommand finished: OK"
+      ]
+     },
+     "verified": true,
+     "fallback_chain": [],
+     "state": "MainWindow",
+     "error": null,
+     "explain": null,
+     "elapsed_ms": 204,
+     "task_id": null
+    }
+   }
+  },
+  {
+   "step": "explain",
+   "value": {
+    "is_error": false,
+    "ms": 156,
+    "result": {
+     "action": "generate_tone",
+     "available_now": true,
+     "state": "MainWindow",
+     "fallback_chain": [
+      "L1",
+      "L2",
+      "L3"
+     ],
+     "blocked_layers": {
+      "L0": {
+       "support": "unsupported",
+       "note": "not declared in manifest"
+      }
+     }
+    }
+   }
+  },
+  {
+   "step": "screenshot",
+   "value": {
+    "marks": 139,
+    "sample": [
+     {
+      "id": "#1",
+      "rect": [
+       1347,
+       405,
+       1431,
+       457
+      ],
+      "via": "uia",
+      "label": "Audio Setup"
+     },
+     {
+      "id": "#2",
+      "rect": [
+       827,
+       405,
+       879,
+       457
+      ],
+      "via": "uia",
+      "label": "Stop"
+     },
+     {
+      "id": "#3",
+      "rect": [
+       883,
+       405,
+       935,
+       457
+      ],
+      "via": "uia",
+      "label": "Skip to Start"
+     },
+     {
+      "id": "#4",
+      "rect": [
+       939,
+       405,
+       991,
+       457
+      ],
+      "via": "uia",
+      "label": "Skip to End"
+     },
+     {
+      "id": "#5",
+      "rect": [
+       999,
+       405,
+       1051,
+       457
+      ],
+      "via": "uia",
+      "label": "Record"
+     },
+     {
+      "id": "#6",
+      "rect": [
+       1198,
+       405,
+       1223,
+       430
+      ],
+      "via": "uia",
+      "label": "Zoom In"
+     },
+     {
+      "id": "#7",
+      "rect": [
+       1225,
+       405,
+       1250,
+       430
+      ],
+      "via": "uia",
+      "label": "Zoom Out"
+     },
+     {
+      "id": "#8",
+      "rect": [
+       1252,
+       405,
+       1277,
+       430
+      ],
+      "via": "uia",
+      "label": "Zoom to Selection"
+     }
+    ]
+   }
+  },
+  {
+   "step": "ui_tree",
+   "value": {
+    "elements": 68
+   }
+  },
+  {
+   "step": "resource_state",
+   "value": {
+    "state": "MainWindow",
+    "via": "L2"
+   }
+  },
+  {
+   "step": "trace",
+   "value": {
+    "result": [
+     {
+      "ts": 1790306780.117,
+      "session": "s_35b33dac",
+      "action": "get_version",
+      "layer": "L0",
+      "ok": true,
+      "verified": null,
+      "ms": 0,
+      "params": {}
+     },
+     {
+      "ts": 1790306780.121,
+      "session": "s_35b33dac",
+      "action": "get_version",
+      "layer": "L0",
+      "ok": true,
+      "verified": null,
+      "ms": 0,
+      "params": {}
+     },
+     {
+      "ts": 1790306780.171,
+      "session": "s_35b33dac",
+      "action": "get_preference",
+      "layer": "L1",
+      "ok": true,
+      "verified": null,
+      "ms": 47,
+      "params": {
+       "name": "Locale/Language"
+      }
+     },
+     {
+      "ts": 1790306780.375,
+      "session": "s_35b33dac",
+      "action": "remove_all_tracks",
+      "layer": "L1",
+      "ok": true,
+      "verified": null,
+      "ms": 187,
+      "params": {}
+     },
+     {
+      "ts": 1790306780.762,
+      "session": "s_35b33dac",
+      "action": "get_track_count",
+      "layer": "L1",
+      "ok": true,
+      "verified": null,
+      "ms": 30,
+      "params": {}
+     },
+     {
+      "ts": 1790306780.792,
+      "session": "s_35b33dac",
+      "action": "get_clip_count",
+      "layer": "L1",
+      "ok": true,
+      "verified": null,
+      "ms": 31,
+      "params": {}
+     },
+     {
+      "ts": 1790306780.911,
+      "session": "s_35b33dac",
+      "action": "get_track_count",
+      "layer": "L1",
+      "ok": true,
+      "verified": null,
+      "ms": 15,
+      "params": {}
+     },
+     {
+      "ts": 1790306780.937,
+      "session": "s_35b33dac",
+      "action": "get_clip_count",
+      "layer": "L1",
+      "ok": true,
+      "verified": null,
+      "ms": 32,
+      "params": {}
+     },
+     {
+      "ts": 1790306780.937,
+      "session": "s_35b33dac",
+      "action": "generate_tone",
+      "layer": "L1",
+      "ok": true,
+      "verified": true,
+      "ms": 375,
+      "params": {
+       "frequency": 880.0,
+       "duration": 1.5
+      }
+     },
+     {
+      "ts": 1790306781.152,
+      "session": "s_35b33dac",
+      "action": "get_track_count",
+      "layer": "L1",
+      "ok": true,
+      "verified": null,
+      "ms": 30,
+      "params": {}
+     },
+     {
+      "ts": 1790306781.504,
+      "session": "s_35b33dac",
+      "action": "get_track_count",
+      "layer": "L2",
+      "ok": true,
+      "verified": null,
+      "ms": 155,
+      "params": {}
+     },
+     {
+      "ts": 1790306781.529,
+      "session": "s_35b33dac",
+      "action": "get_clip_count",
+      "layer": "L1",
+      "ok": true,
+      "verified": null,
+      "ms": 30,
+      "params": {}
+     },
+     {
+      "ts": 1790306786.356,
+      "session": "s_35b33dac",
+      "action": "get_track_count",
+      "layer": "L2",
+      "ok": true,
+      "verified": null,
+      "ms": 172,
+      "params": {}
+     },
+     {
+      "ts": 1790306786.384,
+      "session": "s_35b33dac",
+      "action": "get_clip_count",
+      "layer": "L1",
+      "ok": true,
+      "verified": null,
+      "ms": 30,
+      "params": {}
+     },
+     {
+      "ts": 1790306786.385,
+      "session": "s_35b33dac",
+      "action": "generate_tone",
+      "layer": "L2",
+      "ok": true,
+      "verified": true,
+      "ms": 5218,
+      "params": {
+       "frequency": 440.0,
+       "duration": 2.0
+      }
+     },
+     {
+      "ts": 1790306786.59,
+      "session": "s_35b33dac",
+      "action": "get_track_count",
+      "layer": "L1",
+      "ok": true,
+      "verified": null,
+      "ms": 31,
+      "params": {}
+     },
+     {
+      "ts": 1790306786.765,
+      "session": "s_35b33dac",
+      "action": "get_track_count",
+      "layer": "L2",
+      "ok": true,
+      "verified": null,
+      "ms": 171,
+      "params": {}
+     },
+     {
+      "ts": 1790306787.602,
+      "session": "s_35b33dac",
+      "action": "undo",
+      "layer": "L3",
+      "ok": true,
+      "verified": null,
+      "ms": 844,
+      "params": {}
+     },
+     {
+      "ts": 1790306787.81,
+      "session": "s_35b33dac",
+      "action": "get_track_count",
+      "layer": "L1",
+      "ok": true,
+      "verified": null,
+      "ms": 32,
+      "params": {}
+     },
+     {
+      "ts": 1790306787.839,
+      "session": "s_35b33dac",
+      "action": "get_clips",
+      "layer": "L1",
+      "ok": true,
+      "verified": null,
+      "ms": 31,
+      "params": {}
+     },
+     {
+      "ts": 1790306788.23,
+      "session": "s_35b33dac",
+      "action": "select_all",
+      "layer": "L2",
+      "ok": true,
+      "verified": null,
+      "ms": 375,
+      "params": {}
+     },
+     {
+      "ts": 1790306788.606,
+      "session": "s_35b33dac",
+      "action": "wav_exists",
+      "layer": "L0",
+      "ok": true,
+      "verified": null,
+      "ms": 0,
+      "params": {
+       "path": "D:\\LegacyBridge\\lb-test\\out\\mcp_tone.wav"
+      }
+     },
+     {
+      "ts": 1790306788.607,
+      "session": "s_35b33dac",
+      "action": "export_wav",
+      "layer": "L1",
+      "ok": true,
+      "verified": true,
+      "ms": 204,
+      "params": {
+       "path": "D:\\LegacyBridge\\lb-test\\out\\mcp_tone.wav"
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "protocol": "2026-07-28",
+ "server_extensions": [
+  "io.modelcontextprotocol/tasks"
+ ],
+ "tools": [
+  "open_session",
+  "close_session",
+  "get_capabilities",
+  "available_now",
+  "describe",
+  "explain",
+  "get_backends",
+  "probe",
+  "get_state",
+  "get_ui_tree",
+  "screenshot",
+  "click",
+  "type_text",
+  "key",
+  "wait_for",
+  "get_trace",
+  "get_version",
+  "get_scripting_status",
+  "enable_scripting",
+  "set_language",
+  "close_app",
+  "get_preference",
+  "get_track_count",
+  "generate_tone",
+  "get_clip_count",
+  "get_clips",
+  "select_all",
+  "undo",
+  "export_wav",
+  "wav_exists",
+  "remove_all_tracks"
+ ]
+}

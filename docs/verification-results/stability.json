@@ -1,0 +1,325 @@
+[
+ {
+  "step": "elicitation",
+  "ok": null,
+  "value": "要刪除目前專案的所有音軌嗎？"
+ },
+ {
+  "step": "remove_all_tracks",
+  "ok": true,
+  "value": {
+   "ms": 409,
+   "via": "L1",
+   "verified": null,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L1]",
+  "ok": true,
+  "value": {
+   "ms": 539,
+   "via": "L1",
+   "verified": true,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L1]",
+  "ok": true,
+  "value": {
+   "ms": 539,
+   "via": "L1",
+   "verified": true,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L1]",
+  "ok": true,
+  "value": {
+   "ms": 561,
+   "via": "L1",
+   "verified": true,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L1]",
+  "ok": true,
+  "value": {
+   "ms": 554,
+   "via": "L1",
+   "verified": true,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L1]",
+  "ok": true,
+  "value": {
+   "ms": 547,
+   "via": "L1",
+   "verified": true,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "elicitation",
+  "ok": null,
+  "value": "要刪除目前專案的所有音軌嗎？"
+ },
+ {
+  "step": "remove_all_tracks",
+  "ok": true,
+  "value": {
+   "ms": 389,
+   "via": "L1",
+   "verified": null,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L2]",
+  "ok": true,
+  "value": {
+   "ms": 5385,
+   "via": "L2",
+   "verified": true,
+   "value": {
+    "steps": 9
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L2]",
+  "ok": true,
+  "value": {
+   "ms": 5374,
+   "via": "L2",
+   "verified": true,
+   "value": {
+    "steps": 9
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L2]",
+  "ok": true,
+  "value": {
+   "ms": 5355,
+   "via": "L2",
+   "verified": true,
+   "value": {
+    "steps": 9
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L2]",
+  "ok": true,
+  "value": {
+   "ms": 5366,
+   "via": "L2",
+   "verified": true,
+   "value": {
+    "steps": 9
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L2]",
+  "ok": true,
+  "value": {
+   "ms": 5376,
+   "via": "L2",
+   "verified": true,
+   "value": {
+    "steps": 9
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "elicitation",
+  "ok": null,
+  "value": "要刪除目前專案的所有音軌嗎？"
+ },
+ {
+  "step": "remove_all_tracks",
+  "ok": true,
+  "value": {
+   "ms": 383,
+   "via": "L1",
+   "verified": null,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L3]",
+  "ok": true,
+  "value": {
+   "ms": 77821,
+   "via": "L3",
+   "verified": true,
+   "value": {
+    "steps": 7
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L3]",
+  "ok": true,
+  "value": {
+   "ms": 81279,
+   "via": "L3",
+   "verified": true,
+   "value": {
+    "steps": 7
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L3]",
+  "ok": true,
+  "value": {
+   "ms": 83635,
+   "via": "L3",
+   "verified": true,
+   "value": {
+    "steps": 7
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L3]",
+  "ok": true,
+  "value": {
+   "ms": 86634,
+   "via": "L3",
+   "verified": true,
+   "value": {
+    "steps": 7
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone[L3]",
+  "ok": true,
+  "value": {
+   "ms": 83448,
+   "via": "L3",
+   "verified": true,
+   "value": {
+    "steps": 7
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "summary",
+  "ok": true,
+  "value": {
+   "L1": {
+    "ok": 5,
+    "n": 5,
+    "tracks_after": 5,
+    "median_ms": 359,
+    "max_ms": 390
+   },
+   "L2": {
+    "ok": 5,
+    "n": 5,
+    "tracks_after": 5,
+    "median_ms": 5202,
+    "max_ms": 5234
+   },
+   "L3": {
+    "ok": 5,
+    "n": 5,
+    "tracks_after": 5,
+    "median_ms": 83000,
+    "max_ms": 86187
+   }
+  }
+ }
+]

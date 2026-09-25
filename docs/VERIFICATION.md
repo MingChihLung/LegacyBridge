@@ -4,7 +4,7 @@
 
 - 日期：2026-09-25
 - 環境：Windows 11（繁中系統）、Python 3.12.4、mcp 2.2.0（協定 2026-07-28）、pywinauto 0.6.9、rapidocr 1.4.4
-- 腳本都在 `examples/audacity/`，原始結果（JSON）在測試資料夾的 `out/` 底下
+- 腳本都在 `examples/audacity/`，原始數據在 [`verification-results/`](verification-results/)
 
 ## 結果總表
 

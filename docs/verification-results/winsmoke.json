@@ -1,0 +1,70 @@
+{
+ "support": {
+  "screen_width": {
+   "L0": "ok",
+   "L1": "unsupported",
+   "L2": "unsupported",
+   "L3": "unsupported"
+  },
+  "tick_count": {
+   "L0": "ok",
+   "L1": "unsupported",
+   "L2": "unsupported",
+   "L3": "unsupported"
+  },
+  "folder_exists": {
+   "L0": "unsupported",
+   "L1": "ok",
+   "L2": "unsupported",
+   "L3": "unsupported"
+  },
+  "windows_dir_via_com": {
+   "L0": "unsupported",
+   "L1": "ok",
+   "L2": "unsupported",
+   "L3": "unsupported"
+  },
+  "missing_dll": {
+   "L0": "probe_failed",
+   "L1": "unsupported",
+   "L2": "unsupported",
+   "L3": "unsupported"
+  }
+ },
+ "screen_width": {
+  "ok": true,
+  "via": "L0",
+  "value": 2560,
+  "error": null
+ },
+ "tick_count": {
+  "ok": true,
+  "via": "L0",
+  "value": 597292156,
+  "error": null
+ },
+ "folder_exists{'path': 'C:\\\\Windows'}": {
+  "ok": true,
+  "via": "L1",
+  "value": true,
+  "error": null
+ },
+ "folder_exists{'path': 'C:\\\\NoSuchDir_xyz'}": {
+  "ok": true,
+  "via": "L1",
+  "value": false,
+  "error": null
+ },
+ "windows_dir_via_com": {
+  "ok": true,
+  "via": "L1",
+  "value": "C:\\WINDOWS",
+  "error": null
+ },
+ "missing_dll": {
+  "ok": false,
+  "via": null,
+  "value": null,
+  "error": "no runnable layer"
+ }
+}

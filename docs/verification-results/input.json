@@ -1,0 +1,299 @@
+[
+ {
+  "step": "elicitation",
+  "ok": null,
+  "value": "要刪除目前專案的所有音軌嗎？"
+ },
+ {
+  "step": "remove_all_tracks",
+  "ok": true,
+  "value": {
+   "ms": 447,
+   "via": "L1",
+   "verified": null,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "generate_tone",
+  "ok": true,
+  "value": {
+   "ms": 554,
+   "via": "L1",
+   "verified": true,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "select_none",
+  "ok": true,
+  "value": {
+   "ms": 372,
+   "via": "L1",
+   "verified": null,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "select_all[L2]",
+  "ok": true,
+  "value": {
+   "ms": 574,
+   "via": "L2",
+   "verified": true,
+   "value": {
+    "steps": 1
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "select_all[L2] ground truth",
+  "ok": true,
+  "value": {
+   "before": 0.0,
+   "after": 2.0
+  }
+ },
+ {
+  "step": "select_none",
+  "ok": true,
+  "value": {
+   "ms": 353,
+   "via": "L1",
+   "verified": null,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "select_all[L3]",
+  "ok": true,
+  "value": {
+   "ms": 1006,
+   "via": "L3",
+   "verified": true,
+   "value": {
+    "steps": 1
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "select_all[L3] ground truth",
+  "ok": true,
+  "value": {
+   "before": 0.0,
+   "after": 2.0
+  }
+ },
+ {
+  "step": "generate_tone",
+  "ok": true,
+  "value": {
+   "ms": 555,
+   "via": "L1",
+   "verified": true,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "undo[L2]",
+  "ok": true,
+  "value": {
+   "ms": 533,
+   "via": "L2",
+   "verified": null,
+   "value": {
+    "steps": 1
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "undo[L2] ground truth",
+  "ok": true,
+  "value": {
+   "clips_before": 2,
+   "clips_after": 1
+  }
+ },
+ {
+  "step": "generate_tone",
+  "ok": true,
+  "value": {
+   "ms": 570,
+   "via": "L1",
+   "verified": true,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "undo[L3]",
+  "ok": true,
+  "value": {
+   "ms": 938,
+   "via": "L3",
+   "verified": null,
+   "value": {
+    "steps": 1
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "undo[L3] ground truth",
+  "ok": true,
+  "value": {
+   "clips_before": 2,
+   "clips_after": 1
+  }
+ },
+ {
+  "step": "state_with_modal",
+  "ok": true,
+  "value": {
+   "state": "Dialog",
+   "via": "L2"
+  }
+ },
+ {
+  "step": "available_now_with_modal",
+  "ok": true,
+  "value": [
+   "get_version",
+   "get_scripting_status",
+   "enable_scripting",
+   "set_language",
+   "get_preference",
+   "get_track_count",
+   "get_clip_count",
+   "get_clips",
+   "get_selection_length",
+   "wav_exists"
+  ]
+ },
+ {
+  "step": "generate_tone",
+  "ok": false,
+  "value": {
+   "ms": 351,
+   "via": null,
+   "verified": null,
+   "value": null,
+   "error": "requires state ['MainWindow'], current is Dialog",
+   "chain": []
+  }
+ },
+ {
+  "step": "gated_refusal",
+  "ok": true,
+  "value": "requires state ['MainWindow'], current is Dialog"
+ },
+ {
+  "step": "ui_tree_sees_dialog",
+  "ok": true,
+  "value": [
+   "Audacity",
+   "Tone",
+   "Panel",
+   "\u0007",
+   "Panel",
+   ""
+  ]
+ },
+ {
+  "step": "click",
+  "ok": true,
+  "value": {
+   "ms": 254,
+   "via": null,
+   "verified": null,
+   "value": {
+    "ok": true,
+    "via": "L2",
+    "target": "name:Cancel",
+    "state": "MainWindow"
+   },
+   "error": null,
+   "chain": null
+  }
+ },
+ {
+  "step": "state_after_cancel",
+  "ok": true,
+  "value": {
+   "state": "MainWindow",
+   "via": "L2"
+  }
+ },
+ {
+  "step": "generate_tone",
+  "ok": true,
+  "value": {
+   "ms": 551,
+   "via": "L1",
+   "verified": true,
+   "value": {
+    "responses": [
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK",
+     "BatchCommand finished: OK"
+    ]
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "works_again_after_cancel",
+  "ok": true,
+  "value": "L1"
+ }
+]

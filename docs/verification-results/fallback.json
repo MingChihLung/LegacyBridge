@@ -1,0 +1,179 @@
+[
+ {
+  "step": "capabilities_without_pipe",
+  "ok": true,
+  "value": {
+   "get_version": {
+    "pref": "L0",
+    "L1": "unsupported"
+   },
+   "get_scripting_status": {
+    "pref": "L0",
+    "L1": "unsupported"
+   },
+   "enable_scripting": {
+    "pref": "L0",
+    "L1": "unsupported"
+   },
+   "set_language": {
+    "pref": "L0",
+    "L1": "unsupported"
+   },
+   "close_app": {
+    "pref": "L2",
+    "L1": "probe_failed"
+   },
+   "disable_scripting": {
+    "pref": "L0",
+    "L1": "unsupported"
+   },
+   "get_preference": {
+    "pref": "L0",
+    "L1": "probe_failed"
+   },
+   "get_track_count": {
+    "pref": "L2",
+    "L1": "probe_failed"
+   },
+   "generate_tone": {
+    "pref": "L2",
+    "L1": "probe_failed"
+   },
+   "get_clip_count": {
+    "pref": null,
+    "L1": "probe_failed"
+   },
+   "get_clips": {
+    "pref": null,
+    "L1": "probe_failed"
+   },
+   "get_selection_length": {
+    "pref": null,
+    "L1": "probe_failed"
+   },
+   "select_none": {
+    "pref": null,
+    "L1": "probe_failed"
+   },
+   "select_all": {
+    "pref": "L2",
+    "L1": "probe_failed"
+   },
+   "undo": {
+    "pref": "L2",
+    "L1": "probe_failed"
+   },
+   "export_wav": {
+    "pref": null,
+    "L1": "probe_failed"
+   },
+   "wav_exists": {
+    "pref": "L0",
+    "L1": "unsupported"
+   },
+   "remove_all_tracks": {
+    "pref": null,
+    "L1": "probe_failed"
+   }
+  }
+ },
+ {
+  "step": "generate_tone",
+  "ok": true,
+  "value": {
+   "ms": 5338,
+   "via": "L2",
+   "verified": true,
+   "value": {
+    "steps": 9
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "auto_routed_to",
+  "ok": true,
+  "value": "L2"
+ },
+ {
+  "step": "get_track_count",
+  "ok": true,
+  "value": {
+   "ms": 159,
+   "via": "L2",
+   "verified": null,
+   "value": 1,
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "undo",
+  "ok": true,
+  "value": {
+   "ms": 518,
+   "via": "L2",
+   "verified": null,
+   "value": {
+    "steps": 1
+   },
+   "error": null,
+   "chain": []
+  }
+ },
+ {
+  "step": "export_wav",
+  "ok": false,
+  "value": {
+   "ms": 439,
+   "via": null,
+   "verified": null,
+   "value": null,
+   "error": "no runnable layer",
+   "chain": []
+  }
+ },
+ {
+  "step": "export_blocked_without_pipe",
+  "ok": true,
+  "value": "no runnable layer"
+ },
+ {
+  "step": "explain",
+  "ok": true,
+  "value": {
+   "ms": 171,
+   "via": null,
+   "verified": null,
+   "value": {
+    "action": "export_wav",
+    "available_now": false,
+    "state": "MainWindow",
+    "fallback_chain": [],
+    "blocked_layers": {
+     "L0": {
+      "support": "unsupported",
+      "note": "not declared in manifest"
+     },
+     "L1": {
+      "support": "probe_failed",
+      "note": "pipe \\\\.\\pipe\\ToSrvPipe not present"
+     },
+     "L2": {
+      "support": "unsupported",
+      "note": "not declared in manifest"
+     },
+     "L3": {
+      "support": "unsupported",
+      "note": "not declared in manifest"
+     }
+    },
+    "reason": "no runnable layer",
+    "hint": "No layer can run this; use low-level tools (get_ui_tree / screenshot + click) or fix the probe notes."
+   },
+   "error": null,
+   "chain": []
+  }
+ }
+]
